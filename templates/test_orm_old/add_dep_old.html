@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>增加部门</title>
+</head>
+<body>
+    <div align="center">
+        <h1>增加部门</h1>
+        <hr>
+        <!--    设置<form>表单的method='post'，当单击“保存”按钮时，向后端发送POST请求 -->
+        {#action属性设置处理请求的地址（URL），这个地址要和匹配文件urls.py文件中配置项一致#}
+        <form action="" method="post">
+            <!--    Django安全机制，防止CSRF所做的保护   -->
+            {% csrf_token %}
+            <!--<form>标签中每个<input>输入的值都会随着POST请求传给视图函数，
+            视图函数通过request.POST.GET('xxx')形式取得输入的值，xxx是<input>标签中属性name的值-->
+            <input type="hidden" name="id" id="id" value="{{ department.id }}">
+            <div>
+                <lable>部门：</lable>
+                <input type="text" name="dep_name" id="dep_name">
+            </div>
+            <br>
+            <div>
+                <lable>备注：</lable>
+                <input type="text" name="dep_script" id="dep_script">
+            </div>
+            <br>
+            <div>
+                <input type="submit" value="保存">
+            </div>
+        </form>
+        <!--错误信息显示在这里-->
+        {{ error_info }}
+    </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>补充信息增加表</title>
+</head>
+<body>
+    <div align="center">
+        <h1>补充信息增加表</h1>
+        <hr>
+        <form action="/test_orm_old/add_empinfo_old/" method="post">
+            {% csrf_token %}
+            <div>
+                <lable>电话：</lable>
+                <input type="text" name="phone" id="phone">
+            </div>
+            <br>
+            <div>
+                <lable>家庭地址：</lable>
+                <input type="text" name="address" id="address">
+            </div>
+            <br>
+            <div>
+                <input type="submit" value="增加">
+            </div>
+        </form>
+        <div style="color: red">{{ error_info }}</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>员工数据表</title>
+</head>
+<body>
+<div align="center">
+    <h1>员工数据表</h1>
+    <hr>
+    <div>
+        <a href="/test_orm_old/add_emp_old/">增加一条记录</a>
+    </div>
+    <br>
+    <table border="1" cellspacing="0px">
+        <thead>
+        <tr>
+            <td>姓名</td>
+            <td>邮箱</td>
+            <td>薪水</td>
+            <td>地址</td>
+            <td>部门</td>
+            <td>团体</td>
+            <td colspan="2">操作</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for emp in emp_list %}
+            <tr>
+                <td>{{ emp.name }}</td>
+                <td>{{ emp.email }}</td>
+                <td>{{ emp.salary }}￥</td>
+                <td>{{ emp.info.address }}</td>
+                <td>{{ emp.dep.dep_name }}</td>
+                <td>
+                    <!--多对多关系取值方式，通过emp.group.all取本记录关联的group的对象-->
+                    {% for gp in emp.group.all %}
+                        {% if forloop.last %}
+                            {{ gp.group_name }}
+                        {% else %}
+                            {{ gp.group_name }}
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td><a href="/test_orm_old/del_emp_old/{{ emp.id }}">删除</a></td>
+                <td><a href="/test_orm_old/edit_emp_old/{{ emp.id }}">修改</a></td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="7">无相关记录</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
