@@ -214,3 +214,21 @@ def edit_employee_old(request, emp_id):
     info_list = employee_info.objects.all()
     return render(request, 'test_orm_old/edit_emp_old.html',
                   {'emp': emp, 'dep_list': dep_list, 'group_list': group_list, 'info_list': info_list})
+
+
+# 外键跨表关联操作实例
+def test_foreign(request):
+    # 取出employee的一条记录
+    emp = employee.objects.get(id=4)
+    # 正向操作，通过外键值dep关联到department数据表的一条记录，然后取得该记录的dep_name字段
+    dep_name = emp.dep.dep_name
+
+    dep_obj = department.objects.get(id=16)
+    # 反向操作，通过employee_set关联到employee数据表，然后all()函数取得其全部记录
+    emp_list = dep_obj.employee_set.all()
+    emp_names = [emp.name for emp in emp_list]
+    return HttpResponse({"正向操作：员工名称：{0}，所在部门名称：{1} <br> 反向操作：部门名称：{2}，部门员工：{3}".
+                        format(emp.name, dep_name, dep_obj.dep_name, emp_names)})
+
+
+
