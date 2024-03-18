@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import path, include
 
@@ -24,3 +25,13 @@ urlpatterns = [
     # 如果URL配置文件分级，在匹配URL时，要把各级配置文件中URL表达式合并成一个完整的URL表达式进行匹配。
     path('test_orm_old/', include('employee.urls')),
 ]
+'''
+# 导入django.urls相关模块
+from django.urls import path, re_path
+from . import views
+urlpatterns = [
+    # 命名式URL参数，参数名分别为year和month
+    re_path('data1/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/',views.test)
+]
+'''
+

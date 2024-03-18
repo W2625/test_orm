@@ -26,4 +26,7 @@ urlpatterns = [
     path('add_empinfo_old/', add_employeeinfo_old),
     path('edit_empinfo_old/<int:info_id>/', edit_employeeinfo_old),
     path('del_empinfo_old/<int:info_id>/', del_employeeinfo_old),
+
+    # 外键跨表关联操作实例
+    path('test_foreign/', test_foreign),
 ]

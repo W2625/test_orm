@@ -9,7 +9,7 @@ class employee(models.Model):
     name = models.CharField(max_length=32, verbose_name='姓名')
     # 员工邮箱
     email = models.EmailField(verbose_name='邮箱')
-    # 员工部门
+    # 员工部门，外键，形成一对多的关系
     # ForeignKey类型，与department表中记录多对一关系
     # on_delete=models.CASCADE表示如果外键所关联的department表中的一条记录被删除，则本表中与这条记录有关联的记录将全部删掉
     dep = models.ForeignKey(to='department', on_delete=models.CASCADE)

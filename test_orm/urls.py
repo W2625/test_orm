@@ -23,4 +23,6 @@ urlpatterns = [
     # 与文件的路径有些相似，只是用“.”作为分隔符，并且最后的文件名不包含扩展名。
     # 如果URL配置文件分级，在匹配URL时，要把各级配置文件中URL表达式合并成一个完整的URL表达式进行匹配。
     path('test_orm_old/', include('employee.urls')),
+    # 导入test_view的urls.py文件
+    path('test_view/', include('test_view.urls')),
 ]
