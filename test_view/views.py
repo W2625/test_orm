@@ -35,3 +35,19 @@ def depdetail(request, dep_id):
 def test_redirect(request):
     # 视图函数depdetail()有参数dep_id
     return redirect('depdetail', dep_id=2)
+
+
+from django.views.generic import TemplateView
+
+
+# 视图继承于TemplateView
+class test_templateview(TemplateView):
+    # 设置模版文件
+    template_name = 'test_view/test_temp.html'
+
+    # 重写父类get_context_data()方法
+    def get_context_data(self, **kwargs):
+        context = super(test_templateview, self).get_context_data(**kwargs)
+        # 增加一个模版变量test
+        context['test'] = '这是一个要传递的变量'
+        return context

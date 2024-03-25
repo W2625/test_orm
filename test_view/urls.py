@@ -6,5 +6,6 @@ urlpatterns = [
     path('hello_view/', views.hello_view),
     path('dep/<int:dep_id>/', views.depdetail, name='depdetail'),
     path('test_redirect/', views.test_redirect),
-
+    # 因为基于类的通用视图函数在调用时以函数的形式而不能以类的形式被调用，需要把类视图转换为函数视图，所以在第二个参数（即类视图）后加“.as_view()”
+    path('test_templateview/', views.test_templateview.as_view()),
 ]
