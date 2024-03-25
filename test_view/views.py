@@ -31,7 +31,7 @@ def depdetail(request, dep_id):
 #     # 这个URL对应视图函数views.depdetail()，实际上调用这个函数
 #     return redirect(obj)
 
-# 方法一（参数是视图函数名称时）
+# 方法二（参数是视图函数名称时）
 def test_redirect(request):
     # 视图函数depdetail()有参数dep_id
     return redirect('depdetail', dep_id=2)
