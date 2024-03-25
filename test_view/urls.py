@@ -4,4 +4,7 @@ from . import views
 
 urlpatterns = [
     path('hello_view/', views.hello_view),
+    path('dep/<int:dep_id>/', views.depdetail, name='depdetail'),
+    path('test_redirect/', views.test_redirect),
+
 ]
