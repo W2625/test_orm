@@ -51,3 +51,35 @@ class test_templateview(TemplateView):
         # 增加一个模版变量test
         context['test'] = '这是一个要传递的变量'
         return context
+
+
+from django.views.generic import ListView
+
+
+# 视图继承于ListView
+class test_listview(ListView):
+    # 设置数据模型
+    model = models.department
+    # 设置模版文件
+    template_name = 'test_view/test_listview.html'
+    # 设置模版变量，若无指定context_object_name默认使用object_list作为模版变量的名字
+    context_object_name = 'person_list'
+
+
+class listviewdemo(ListView):
+    # 设置模版文件
+    template_name = 'test_view/listviewdemo.html'
+    # 设置模版变量，若无指定context_object_name默认使用object_list作为模版变量的名字
+    context_object_name = 'person_list'
+
+    # 重写get_queryset()取person中性别为女的人员，gender值为'2'
+    def get_queryset(self):
+        # 按照gender='2'过滤数据
+        personlist = models.person.objects.filter(gender='2')
+        return personlist
+
+    # 重写父类的get_context_data()，增加模版变量loguser
+    def get_context_data(self, **kwargs):
+        kwargs['loguser'] = models.loguser.objects.all().first()
+        # 继承父类模版变量的属性，并通过return语句返回这一模版变量（字典类型）
+        return super(listviewdemo, self).get_context_data(**kwargs)
