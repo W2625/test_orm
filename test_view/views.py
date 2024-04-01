@@ -83,3 +83,40 @@ class listviewdemo(ListView):
         kwargs['loguser'] = models.loguser.objects.all().first()
         # 继承父类模版变量的属性，并通过return语句返回这一模版变量（字典类型）
         return super(listviewdemo, self).get_context_data(**kwargs)
+
+
+from django.views.generic import DetailView
+
+
+# 视图继承于DetailView
+class test_detailview(DetailView):
+    # 设置数据模型
+    model = models.person
+    # 设置模版文件
+    template_name = 'test_view/test_detailview.html'
+    # 设置模版变量
+    context_object_name = 'person'
+    # 在urls.py文件的urlpatterns定义的URL正则表达式中的实名参数personid
+    pk_url_kwarg = 'personid'
+
+
+class detailviewdemo(DetailView):
+    model = models.person
+    template_name = 'test_view/detailviewdemo.html'
+    context_object_name = 'person'
+    # 在urls.py文件的urlpatterns定义的URL正则表达式中的实名参数personid
+    pk_url_kwarg = 'personid'
+
+    def get_object(self, queryset=None):
+        # 调用父类的get_object()
+        obj = super(detailviewdemo, self).get_object()
+        if obj.gender == '1':
+            obj.gender = '男'
+        else:
+            obj.gender = '女'
+        return obj
+
+    def get_context_data(self, **kwargs):
+        # 增加一个变量test
+        kwargs['test'] = '这是一个DetailView类通用视图生成的页面'
+        return super(detailviewdemo, self).get_context_data(**kwargs)

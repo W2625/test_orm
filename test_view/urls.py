@@ -10,4 +10,6 @@ urlpatterns = [
     path('test_templateview/', views.test_templateview.as_view()),
     path('test_listview/', views.test_listview.as_view()),
     path('listviewdemo/', views.listviewdemo.as_view()),
+    path('test_detailview/<int:personid>/', views.test_detailview.as_view()),
+    path('detailviewdemo/<int:personid>/', views.detailviewdemo.as_view()),
 ]
