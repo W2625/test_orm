@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+</head>
+<body>
+    <div align="center">
+        <h1>登录页面</h1>
+        <hr>
+        <!--    action设置了处理请求的URL，这里设置action的值是为了最终找到视图函数【第一个字符为'/'】  -->
+        <form method="post" action="/test_view/login/">
+            {% csrf_token %}
+            <div style="margin-top: 10px;margin-bottom: 6px;">
+                <label for="">用户名：</label>
+                <!--#这个模版变量名为account_two，因为render()传入的变量名也是account_two//-->
+                <input type="text" name="account" value="{{ accpunt_two }}">
+            </div>
+            <div style="margin-top: 10px;margin-bottom: 6px;">
+                <label for="">密码：</label>
+                <!--    设置type="password"，使输入的字符不可见  -->
+                <input type="password" name="password">
+            </div>
+            <div style="margin-top: 10px;margin-bottom: 6px;">
+                <input type="checkbox" name="remember">记住登录用户名
+            </div>
+            <div style="color: red;">
+                {{ errmsg }}
+            </div>
+            <div style="margin-top: 6px;margin-bottom: 6px;">
+                <input type="submit" value="登录">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

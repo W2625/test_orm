@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>增加人员页面</title>
+</head>
+<body>
+<div align="center">
+    <h1>增加人员页面</h1>
+    <hr>
+    <!--    由于表单有文件类型字段，需要上传文件，必须设置enctype="multipart/form-data"    -->
+    <form action="/test_view/add_person/" method="post" enctype="multipart/form-data">
+        <!--    防止CSRF  -->
+        {% csrf_token %}
+        <div>
+            <lable>姓名：</lable>
+            <input type="text" name="name" id="name">
+        </div>
+        <br>
+        <div>
+            <lable>邮箱：</lable>
+            <input type="text" name="email" id="email">
+        </div>
+        <br>
+        <div>
+            <lable>性别：</lable>
+            <select name="gender">
+                <option value="1">男</option>
+                <option value="2">女</option>
+            </select>
+        </div>
+        <br>
+        <div>
+            {#在<lable>标签中加一个<img>标签，<lable>标签的位置会显示一个图片，<lable>标签的for属性值是{{ formobj.head_img }}产生的#}
+            {#标签<input type="file"……>的id值，该标签设置成了不可见，产生的效果就是单击图片打开文件选择对话框#}
+            <lable for="head_img">头像：
+                <img id="imgforshow" src="/static/default_header.png" style="width: 60px;height: 60px;">
+            </lable>
+            <input type="file" name="head_img" id="head_img" style="display: none;">
+        </div>
+        <br>
+        <div>
+            <lable>附件：</lable>
+            <input type="file" name="attachment" id="attachment">
+        </div>
+        <br>
+        <div>
+            <input type="submit" value="增加">
+        </div>
+    </form>
+</div>
+{% load staticfiles %}
+<script src="{% static 'jquery-3.4.1.min.js' %}"></script>
+<script>
+    //由于上传后文件在提交之前并没有src指向它，所以在提交之前是不可见的
+    //以下的脚本文件通过一个文件读写对象被读到页面内存中，并以URL形式放在对象的result属性中
+    //然后设置图片src指向这个result属性值
+    //找到头像的<input>标签并绑定change事件
+    $('#head_img').change(function () {
+        //创建一个读取头像文件的对象
+        var rd_img = new FileReader();
+        //取得当前选中的头像文件
+        rd_img.readAsDataURL(this.files[0])
+        //读取文件要耗费一定的时间
+        //用onload确定文件读取完成后，才能把图片加载到<img>标签中
+        rd_img.onload = function () {
+            $('#imgforshow').attr("src",rd_img.result)
+        };
+    });
+</script>
+</body>
+</html>

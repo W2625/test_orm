@@ -12,4 +12,14 @@ urlpatterns = [
     path('listviewdemo/', views.listviewdemo.as_view()),
     path('test_detailview/<int:personid>/', views.test_detailview.as_view()),
     path('detailviewdemo/<int:personid>/', views.detailviewdemo.as_view()),
+    # 登录
+    path('login/', views.login),
+    # 主页，人员列表
+    path('index/', views.index),
+    # 增加人员
+    path('add_person/', views.add_person),
+    # 删除人员
+    path('del_person/<int:personid>/', views.del_person),
+    # 修改人员
+    path('edit_person/<int:personid>/', views.edit_person),
 ]
